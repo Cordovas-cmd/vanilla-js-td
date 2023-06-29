@@ -3,10 +3,34 @@ const ctx = canvas.getContext('2d');
 canvas.width = 900;
 canvas.height = 600;
 
+// globals
 const cellSize = 100;
 const cellGap = 3;
 const gameGrid = [];
 
+
+// pointer
+const mouse = {
+    x: undefined,
+    y: undefined,
+    width: 0.1,
+    height: 0.1,
+}
+
+let canvasPosition = canvas.getBoundingClientRect();
+console.log(canvasPosition)
+canvas.addEventListener('mousemove', function(e){
+    mouse.x = e.x - canvasPosition.left;
+    mouse.y = e.y - canvasPosition.top;
+    // console.log(mouse.x)
+    // console.log(mouse.y)
+});
+
+
+canvas.addEventListener('mouseleave', function(){
+    mouse.x = undefined;
+    mouse.y = undefined;
+})
 // grid board
 const controlBar = {
     width: canvas.width,
@@ -28,6 +52,8 @@ class Cell {
 
 
 function createGrid() {
+
+    // nested for loop let's us run through x and y and add cells
     for (let y = cellSize; y < canvas.height; y += cellSize) {
         for (let x = 0; x < canvas.width; x += cellSize) {
             gameGrid.push(new Cell(x, y));
