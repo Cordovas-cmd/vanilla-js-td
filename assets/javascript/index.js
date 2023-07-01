@@ -102,3 +102,5 @@ function collision(first, second){
         return true;
     };
 };
+
+// need to find a sprite sheet
